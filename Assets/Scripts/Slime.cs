@@ -12,7 +12,7 @@ public class Slime : MonoBehaviour, IDamaged
     public Transform target;
     public HpBar hp;
     public float Exp_after_death = 20;
-    
+    public GameObject coin;
     private void Start()
     {
         enemyRef = Resources.Load("Slime");
@@ -42,10 +42,11 @@ public class Slime : MonoBehaviour, IDamaged
                 statue.smiles++;
             }
             gameObject.SetActive(false);
-            
+             Instantiate(coin, this.transform.position, Quaternion.identity);
             Invoke("Respawn", 10f);
             hp.Now_exp += Exp_after_death;
             
         }
+       
     }
 }

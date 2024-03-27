@@ -21,6 +21,8 @@ public class HpBar : MonoBehaviour
     public Text Lvl_text;
     public Text Max_exp_text;
     public int damage = 30;
+    public int money = 0;
+    public Text money_count;
     public void RestoreHealth(float amount)
     {
         HP += amount;
@@ -36,7 +38,8 @@ public class HpBar : MonoBehaviour
             UsePotion();
         }
         Lvl_bar.fillAmount = Now_exp / Max_exp;
-        Lvl_text.text = "Lvl" +" " + Lvl.ToString();       
+        Lvl_text.text = "Lvl" +" " + Lvl.ToString();
+        money_count.text = money.ToString();
         Max_exp_text.text = Now_exp.ToString() + " / " + Math.Round(Max_exp).ToString();
         if (Now_exp >= Max_exp)
         {

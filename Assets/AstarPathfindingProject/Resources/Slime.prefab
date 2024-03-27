@@ -34,13 +34,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7548070846581765725}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.84, y: -6.13, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6694135345564484478
 BoxCollider2D:
@@ -224,7 +224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b28924e380db04ba7f93cd35c3b943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statue: {fileID: 6715769852120277418, guid: e25b87a7bde5e1a46962fd08ff323b8b, type: 3}
+  statue: {fileID: 0}
+  target: {fileID: 0}
+  hp: {fileID: 0}
+  Exp_after_death: 20
+  coin: {fileID: 4372126789899565450, guid: bada6ea3f54051c49bffff02422608d0, type: 3}
 --- !u!114 &3489399847210952587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  target: {fileID: 9162420866459865014, guid: 7885cf4e2d4db1d47b1c2b4750560051, type: 3}
+  target: {fileID: 0}
 --- !u!114 &5075038187962023150
 MonoBehaviour:
   m_ObjectHideFlags: 0
