@@ -31,13 +31,13 @@ public class Inventory : MonoBehaviour
     }
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.I))
+        /*if(Input.GetKeyDown(KeyCode.I))
         {
             if (isOpened)
                 Close();
             else
                 Open();
-        }
+        }*/
     }
     void Open()
     {

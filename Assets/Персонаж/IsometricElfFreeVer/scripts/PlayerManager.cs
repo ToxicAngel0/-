@@ -13,13 +13,16 @@ public class PlayerManager : MonoBehaviour
     public GameObject ItemPrefab;
     public GameObject ThrowPrefab;
     public GameObject BowPrefab;
+    public GameObject Inventory;
+    public bool CanAttack = false;
     Rigidbody2D rb; // Переменные для компонентов Rigidbody2D и Animator
     Animator animator;
     public float moveSpeed = 1f; // Скорость движения персонажа
-
+    public item item_in_cell;
     [SerializeField]// Приватное поле для точки стрельбы
     private Transform shotPointTransform = null;
-   
+    public GameObject[] chestLoot = new GameObject[12];
+    public HpBar hp;
     void Start()
     {
         instance = this;
@@ -46,6 +49,30 @@ public class PlayerManager : MonoBehaviour
         // Выполнение действий игрока в корутине
         StartCoroutine(Action());
         Shot();// Выстрелы из оружия при нажатии соответствующих клавиш
+        for (int i = 0; i < chestLoot.Length; i++)
+        {
+            if (chestLoot[i].GetComponent<cell>().status==false)
+            {
+
+                item_in_cell = chestLoot[i].GetComponentInChildren<item>();
+                if (item_in_cell.Name == "Bow")
+                {
+                    CanAttack = true;
+                }
+                else if (item_in_cell.Name == "Meat") //еда исчезает сразу же, поэтому статус становится фалс
+                {
+                    hp.HP += 20;
+                    Destroy(item_in_cell.gameObject);
+                    chestLoot[i].GetComponent<cell>().status = true;
+                }
+                else if (item_in_cell.Name == "Apple") //еда исчезает сразу же, поэтому статус становится фалс
+                {
+                    hp.HP += 10;
+                    Destroy(item_in_cell.gameObject);
+                    chestLoot[i].GetComponent<cell>().status = true;
+                }
+            }
+        }
     }
     IEnumerator Action()// Корутина для обработки различных действий игрока
     { // Действия при нажатии определенных клавиш
@@ -76,6 +103,17 @@ public class PlayerManager : MonoBehaviour
             }
             this.transform.position = Vector2.zero;
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (Inventory.activeSelf==true)
+            {
+                Inventory.SetActive(false);
+            }
+            else if (Inventory.activeSelf==false) 
+            {
+                Inventory.SetActive(true);
+            }
+        }
     }
     private float GetRotation()// Метод для получения угла поворота при стрельбе
     {
@@ -101,23 +139,41 @@ public class PlayerManager : MonoBehaviour
     private float cooldown = 0;
     void Shot()
     {
-        if (Input.GetKeyDown(KeyCode.X) && cooldown <= 0)
+        if (CanAttack)
         {
-            cooldown = 0.5f;
-            animator.SetTrigger("Throw");
-            Instantiate(ThrowPrefab, transform.position, Quaternion.Euler(new Vector3(0,0, GetRotation())), null);
-        }
+            if (Input.GetKeyDown(KeyCode.X) && cooldown <= 0)
+            {
+                cooldown = 0.5f;
+                animator.SetTrigger("Throw");
+                Instantiate(ThrowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+            }
 
-        if (Input.GetKeyDown(KeyCode.C) && cooldown <= 0)
+            if (Input.GetKeyDown(KeyCode.C) && cooldown <= 0)
+            {
+                cooldown = 0.5f;
+                animator.SetTrigger("Bow");
+                // Создаем экземпляр объекта BowPrefab в позиции текущего объекта (transform.position)
+                // с поворотом, заданным через Quaternion.Euler с помощью GetRotation() для оси Z
+                Instantiate(BowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+            }
+            if (cooldown >= 0)    // Если cooldown больше или равен нулю, уменьшаем его на значение, пропорциональное времени прошедшему с предыдущего кадра (Time.deltaTime)
+                cooldown -= Time.deltaTime;
+        }
+    }
+
+    public void Check()
+    {
+        for (int i = 0; i < chestLoot.Length; i++)
         {
-            cooldown = 0.5f;
-            animator.SetTrigger("Bow");
-            // Создаем экземпляр объекта BowPrefab в позиции текущего объекта (transform.position)
-            // с поворотом, заданным через Quaternion.Euler с помощью GetRotation() для оси Z
-            Instantiate(BowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
-        }  
-        if(cooldown >=0)    // Если cooldown больше или равен нулю, уменьшаем его на значение, пропорциональное времени прошедшему с предыдущего кадра (Time.deltaTime)
-            cooldown -= Time.deltaTime;
+            if (chestLoot[i].GetComponent<cell>() != null)
+            {
+                item item_in_cell = chestLoot[i].GetComponentInChildren<item>();
+                if (item_in_cell.name == "Bow")
+                {
+                    CanAttack = true;
+                }
+            }
+        }
     }
 }
 

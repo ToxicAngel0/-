@@ -58,8 +58,11 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\coin.cs" />
+    <Compile Include="Assets\Scripts\chest_cell.cs" />
     <Compile Include="Assets\Scripts\HpBar.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\ArrowManager.cs" />
+    <Compile Include="Assets\Scripts\chest_script.cs" />
     <Compile Include="Assets\Scripts\IDamaged.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\PlayerManager.cs" />
     <Compile Include="Assets\Slimme\StateRandom.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\StoneManager.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\bow.cs" />
     <Compile Include="Assets\Scripts\quest_window_open.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\ShotController.cs" />
     <Compile Include="Assets\Окружение\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
@@ -77,11 +81,12 @@
     <Compile Include="Assets\NPC\Inventory\PickUpObject.cs" />
     <Compile Include="Assets\Scripts\Tutorial_activator.cs" />
     <Compile Include="Assets\Scripts\Tutorial.cs" />
+    <Compile Include="Assets\Scripts\item.cs" />
     <Compile Include="Assets\Окружение\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
-    <Compile Include="Assets\coin.cs" />
     <Compile Include="Assets\Scripts\Teleport.cs" />
     <Compile Include="Assets\NPC\Inventory\Item.cs" />
     <Compile Include="Assets\Scripts\DialogueEd\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\cell.cs" />
     <Compile Include="Assets\Scripts\Slime.cs" />
     <Compile Include="Assets\Scripts\DialogueEd\InstantiateDialogue.cs" />
     <Compile Include="Assets\Окружение\Pixel Art Top Down - Basic\Script\CameraFollow.cs" />
