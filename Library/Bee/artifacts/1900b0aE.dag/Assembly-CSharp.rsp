@@ -401,6 +401,7 @@
 "Assets/Scripts/IDamaged.cs"
 "Assets/Scripts/Inventory.cs"
 "Assets/Scripts/item.cs"
+"Assets/Scripts/market_by_kostya.cs"
 "Assets/Scripts/NPC_Task.cs"
 "Assets/Scripts/QuestObjects/ObjectQuest.cs"
 "Assets/Scripts/QuestObjects/ObjectQuest1.cs"

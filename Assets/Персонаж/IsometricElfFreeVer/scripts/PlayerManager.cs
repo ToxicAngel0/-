@@ -23,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     private Transform shotPointTransform = null;
     public GameObject[] chestLoot = new GameObject[12];
     public HpBar hp;
+    public int Arrows;
+
     void Start()
     {
         instance = this;
@@ -30,6 +32,7 @@ public class PlayerManager : MonoBehaviour
         Application.targetFrameRate = 60;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Arrows = 10;
     }
     void Update()
     {// Получение ввода от пользователя для оси X и Y
@@ -68,6 +71,12 @@ public class PlayerManager : MonoBehaviour
                 else if (item_in_cell.Name == "Apple") //еда исчезает сразу же, поэтому статус становится фалс
                 {
                     hp.HP += 10;
+                    Destroy(item_in_cell.gameObject);
+                    chestLoot[i].GetComponent<cell>().status = true;
+                }
+                else if (item_in_cell.Name == "Arrow") //еда исчезает сразу же, поэтому статус становится фалс
+                {
+                    Arrows += 10;
                     Destroy(item_in_cell.gameObject);
                     chestLoot[i].GetComponent<cell>().status = true;
                 }
@@ -148,10 +157,11 @@ public class PlayerManager : MonoBehaviour
                 Instantiate(ThrowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
             }
 
-            if (Input.GetKeyDown(KeyCode.C) && cooldown <= 0)
+            if (Input.GetKeyDown(KeyCode.C) && cooldown <= 0 && Arrows>=1)
             {
                 cooldown = 0.5f;
                 animator.SetTrigger("Bow");
+                Arrows--;
                 // Создаем экземпляр объекта BowPrefab в позиции текущего объекта (transform.position)
                 // с поворотом, заданным через Quaternion.Euler с помощью GetRotation() для оси Z
                 Instantiate(BowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
