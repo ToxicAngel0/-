@@ -28,8 +28,7 @@ public class HpBar : MonoBehaviour
     public void RestoreHealth(float amount)
     {
         HP += amount;
-        HP = Mathf.Clamp(HP, 0f, Max_hp); // Ограничиваем здоровье в пределах от 0 до 100
-        Bar.fillAmount = HP / Max_hp;
+        
         
     }
 
@@ -42,6 +41,8 @@ public class HpBar : MonoBehaviour
         }
         Lvl_bar.fillAmount = Now_exp / Max_exp;
         Lvl_text.text = "Lvl" +" " + Lvl.ToString();
+        HP = Mathf.Clamp(HP, 0f, Max_hp); // Ограничиваем здоровье в пределах от 0 до 100
+        Bar.fillAmount = HP / Max_hp;
         money_count.text = money.ToString();
         Max_exp_text.text = Now_exp.ToString() + " / " + Math.Round(Max_exp).ToString();
         if (Now_exp >= Max_exp)
@@ -54,6 +55,7 @@ public class HpBar : MonoBehaviour
             HP = Max_hp;
             Bar.fillAmount = HP / Max_hp;
         }
+        
     }
 
     void UsePotion()

@@ -59,14 +59,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\market_by_kostya.cs" />
+    <Compile Include="Assets\enemy\Mobs.cs" />
     <Compile Include="Assets\Scripts\coin.cs" />
     <Compile Include="Assets\Scripts\chest_cell.cs" />
     <Compile Include="Assets\Scripts\HpBar.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\ArrowManager.cs" />
     <Compile Include="Assets\Scripts\chest_script.cs" />
+    <Compile Include="Assets\Scripts\Black_Slime.cs" />
     <Compile Include="Assets\Scripts\IDamaged.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\PlayerManager.cs" />
-    <Compile Include="Assets\Slimme\StateRandom.cs" />
     <Compile Include="Assets\NPC\Inventory\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\tp2.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\StoneManager.cs" />
@@ -74,9 +75,9 @@
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\bow.cs" />
     <Compile Include="Assets\Scripts\quest_window_open.cs" />
+    <Compile Include="Assets\Scripts\Spider.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\ShotController.cs" />
     <Compile Include="Assets\Окружение\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
-    <Compile Include="Assets\Slimme\Mobs.cs" />
     <Compile Include="Assets\NPC\Inventory\UseOfItems.cs" />
     <Compile Include="Assets\NPC\Inventory\ItemInfo.cs" />
     <Compile Include="Assets\NPC\Inventory\PickUpObject.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Assets\Окружение\Pixel Art Top Down - Basic\Script\TopDownCharacterController.cs" />
     <Compile Include="Assets\Персонаж\IsometricElfFreeVer\scripts\PotionManager.cs" />
     <Compile Include="Assets\Окружение\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
+    <Compile Include="Assets\enemy\StateRandom.cs" />
     <Compile Include="Assets\Scripts\NPC_Task.cs" />
     <Compile Include="Assets\Scripts\QuestObjects\ObjectQuest1.cs" />
     <Compile Include="Assets\NPC\Inventory\Inventory.cs" />
