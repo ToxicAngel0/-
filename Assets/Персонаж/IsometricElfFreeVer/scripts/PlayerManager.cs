@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     public Transform ShotPoint;
     public GameObject ItemPrefab;
     public GameObject ThrowPrefab;
-    public GameObject BowPrefab, PotionBowPrefab, ActiveBowPrefab;
+    public GameObject BowPrefab, PotionBowPrefab, FireBowPrefab, ColdBowPrefab, ActiveBowPrefab;
     public GameObject Inventory;
     public bool CanAttack = false;
     Rigidbody2D rb; // Переменные для компонентов Rigidbody2D и Animator
@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject[] chestLoot = new GameObject[12];
     public HpBar hp;
     public int Arrows;
-    public int PArrows;
+    public int PArrows, FArrows, CArrows;
     void Start()
     {
         ActiveBowPrefab = BowPrefab;
@@ -163,6 +163,14 @@ public class PlayerManager : MonoBehaviour
         {
             ActiveBowPrefab = PotionBowPrefab;
         }
+        else if (Input.GetKeyDown("3"))
+        {
+            ActiveBowPrefab = FireBowPrefab;
+        }
+        else if (Input.GetKeyDown("4"))
+        {
+            ActiveBowPrefab = ColdBowPrefab;
+        }
 
         if (CanAttack)
         {
@@ -176,19 +184,34 @@ public class PlayerManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.C) && cooldown <= 0 && Arrows>=1)
             {
                 cooldown = 0.5f;
-                animator.SetTrigger("Bow");
-                if (ActiveBowPrefab == BowPrefab)
+                
+                if (ActiveBowPrefab == BowPrefab && Arrows>0)
                 {
                     Arrows--;
+                    Instantiate(ActiveBowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+                    animator.SetTrigger("Bow");
                 }
-                else if (ActiveBowPrefab == PotionBowPrefab)
+                else if (ActiveBowPrefab == PotionBowPrefab && PArrows > 0)
                 {
                     PArrows--;
+                    Instantiate(ActiveBowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+                    animator.SetTrigger("Bow");
                 }
-
+                else if (ActiveBowPrefab == FireBowPrefab && FArrows > 0)
+                {
+                    FArrows--;
+                    Instantiate(ActiveBowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+                    animator.SetTrigger("Bow");
+                }
+                else if (ActiveBowPrefab == ColdBowPrefab && CArrows > 0)
+                {
+                    CArrows--;
+                    Instantiate(ActiveBowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+                    animator.SetTrigger("Bow");
+                }
                 // Создаем экземпляр объекта BowPrefab в позиции текущего объекта (transform.position)
                 // с поворотом, заданным через Quaternion.Euler с помощью GetRotation() для оси Z
-                Instantiate(BowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);
+                
             }
             if (cooldown >= 0)    // Если cooldown больше или равен нулю, уменьшаем его на значение, пропорциональное времени прошедшему с предыдущего кадра (Time.deltaTime)
                 cooldown -= Time.deltaTime;
