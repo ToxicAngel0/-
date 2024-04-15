@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviour
     public Transform ShotPoint;
     public GameObject ItemPrefab;
     public GameObject ThrowPrefab;
-    public GameObject BowPrefab;
+    public GameObject BowPrefab, PotionBowPrefab, ActiveBowPrefab;
     public GameObject Inventory;
     public bool CanAttack = false;
     Rigidbody2D rb; // Переменные для компонентов Rigidbody2D и Animator
@@ -24,9 +24,10 @@ public class PlayerManager : MonoBehaviour
     public GameObject[] chestLoot = new GameObject[12];
     public HpBar hp;
     public int Arrows;
-
+    public int PArrows;
     void Start()
     {
+        ActiveBowPrefab = BowPrefab;
         instance = this;
         // Установка желаемой частоты кадров и инициализация Rigidbody2D и Animator
         Application.targetFrameRate = 60;
@@ -77,6 +78,12 @@ public class PlayerManager : MonoBehaviour
                 else if (item_in_cell.Name == "Arrow") //еда исчезает сразу же, поэтому статус становится фалс
                 {
                     Arrows += 10;
+                    Destroy(item_in_cell.gameObject);
+                    chestLoot[i].GetComponent<cell>().status = true;
+                }
+                else if (item_in_cell.Name == "PArrow") //еда исчезает сразу же, поэтому статус становится фалс
+                {
+                    PArrows += 10;
                     Destroy(item_in_cell.gameObject);
                     chestLoot[i].GetComponent<cell>().status = true;
                 }
@@ -148,6 +155,15 @@ public class PlayerManager : MonoBehaviour
     private float cooldown = 0;
     void Shot()
     {
+        if (Input.GetKeyDown("1"))
+        {
+            ActiveBowPrefab = BowPrefab;
+        }
+        else if (Input.GetKeyDown("2"))
+        {
+            ActiveBowPrefab = PotionBowPrefab;
+        }
+
         if (CanAttack)
         {
             if (Input.GetKeyDown(KeyCode.X) && cooldown <= 0)
@@ -161,7 +177,15 @@ public class PlayerManager : MonoBehaviour
             {
                 cooldown = 0.5f;
                 animator.SetTrigger("Bow");
-                Arrows--;
+                if (ActiveBowPrefab == BowPrefab)
+                {
+                    Arrows--;
+                }
+                else if (ActiveBowPrefab == PotionBowPrefab)
+                {
+                    PArrows--;
+                }
+
                 // Создаем экземпляр объекта BowPrefab в позиции текущего объекта (transform.position)
                 // с поворотом, заданным через Quaternion.Euler с помощью GetRotation() для оси Z
                 Instantiate(BowPrefab, transform.position, Quaternion.Euler(new Vector3(0, 0, GetRotation())), null);

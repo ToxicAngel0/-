@@ -24,6 +24,7 @@ public class HpBar : MonoBehaviour
     public int money = 0;
     public Text money_count;
     public Text Arrows_count;
+    public Text PArrows_count;
     public PlayerManager PM;
     public void RestoreHealth(float amount)
     {
@@ -35,6 +36,7 @@ public class HpBar : MonoBehaviour
     void Update()
     {
         Arrows_count.text = PM.Arrows.ToString();
+        PArrows_count.text = PM.PArrows.ToString();
         if (Input.GetKeyDown(KeyCode.B))
         {
             UsePotion();

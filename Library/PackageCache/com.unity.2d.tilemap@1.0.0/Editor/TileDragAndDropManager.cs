@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Object = UnityEngine.Object;
 
 namespace UnityEditor.Tilemaps
 {
@@ -131,7 +131,7 @@ namespace UnityEditor.Tilemaps
             }
         }
 
-        internal static string GetDefaultTileAssetDirectoryPath()
+        internal static string GetDefaultTileAssetPath()
         {
             var path = instance.m_LastUserTileAssetPath;
             if (String.IsNullOrEmpty(path))
@@ -143,21 +143,9 @@ namespace UnityEditor.Tilemaps
             return path;
         }
 
-        internal static void SetUserTileAssetDirectoryPath(string path)
+        internal static void SetUserTileAssetPath(string path)
         {
-            var directoryPath = String.Empty;
-            if (!String.IsNullOrEmpty(path))
-            {
-                // UUM-29240: UnityGetDirectoryName clips off last directory if path is not a file path
-                if (String.IsNullOrEmpty(FileUtil.GetPathExtension(path))
-                    && !path.EndsWith("/") // MacOS
-                    && !File.Exists(path))
-                {
-                    path = FileUtil.CombinePaths(path, "");
-                }
-                directoryPath = FileUtil.UnityGetDirectoryName(path);
-            }
-            instance.m_LastUserTileAssetPath = directoryPath;
+            instance.m_LastUserTileAssetPath = path;
         }
 
         static Tilemap GetOrCreateActiveTilemap()

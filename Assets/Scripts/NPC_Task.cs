@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
-using Unity.Properties;
+
 using UnityEngine;
 using UnityEngine.UI;
 
